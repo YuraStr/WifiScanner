@@ -1,0 +1,7 @@
+<resources>
+    <string name="wifi_count">Wifi points count:</string>
+    <string name="app_name">ThirdApp</string>
+    <string name="edit_message">Edit message</string>
+    <string name="goto_sensors">Go to sensors</string>
+    <string name="goto_wifi">Go to Wifi</string>
+</resources>

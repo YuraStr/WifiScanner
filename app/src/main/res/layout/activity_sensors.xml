@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_sensors"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.yuras.thirdapp.SensorsActivity">
+
+    <Button
+        android:id="@+id/goto_wifi"
+        android:text="@string/goto_wifi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="gotoWifi"/>
+
+    <ListView
+        android:id="@+id/sensors_lv"
+        android:layout_below="@id/goto_wifi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</RelativeLayout>
