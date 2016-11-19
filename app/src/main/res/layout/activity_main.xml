@@ -27,8 +27,11 @@
         android:layout_height="wrap_content"
         android:onClick="stopScan" />
 
-    <ListView
-        android:id="@+id/lv"
+    <ImageView
+        android:id="@+id/iv_main"
+        android:layout_marginTop="55dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
+
 </LinearLayout>

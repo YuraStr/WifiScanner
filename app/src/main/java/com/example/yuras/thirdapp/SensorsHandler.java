@@ -48,9 +48,9 @@ public class SensorsHandler implements SensorEventListener {
 
         updateOrientationAngles();
 
-        azimuth = 180 * mOrientationAngles[0] / Math.PI + 180;
-        pitch = 180 * mOrientationAngles[1] / Math.PI + 180;
-        roll = 180 * mOrientationAngles[2] / Math.PI + 180;
+        azimuth = 180 * mOrientationAngles[0] / Math.PI;
+        pitch = 180 * mOrientationAngles[1] / Math.PI;
+        roll = 180 * mOrientationAngles[2] / Math.PI;
     }
 
     private void updateOrientationAngles() {

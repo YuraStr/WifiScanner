@@ -21,29 +21,11 @@
     </item>
     <item
         is-multidex="true"
-        jar="G:\Programms\AndroidApps\ThirdApp\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="a1e7f14a4a25f809b61becbcc466e121dac3f666">
-        <dex dex="G:\Programms\AndroidApps\ThirdApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_55820783646e53199d9c1b1c5e12dae8ee147c43\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="G:\Programms\AndroidApps\ThirdApp\app\build\intermediates\exploded-aar\com.android.support\support-v4\24.2.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
-        <dex dex="G:\Programms\AndroidApps\ThirdApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-v4-24.2.1_e21429e23679cbe352be5a9dee57d63819ff8d33\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
         jar="G:\Programms\AndroidApps\ThirdApp\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.0"
-        sha1="76b27c3159c3689b477ea66ce00021407f8c0c95">
+        sha1="2ae3f03da25cba0425496710ca6d22f5509708ca">
         <dex dex="G:\Programms\AndroidApps\ThirdApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_e61b54bca804b9484ed94181bcc2338d86df1cf5\classes.dex" />
     </item>
     <item
@@ -54,15 +36,6 @@
         revision="25.0.0"
         sha1="7e4389bd133359a2ff88623ff1e4ff93d6e6f780">
         <dex dex="G:\Programms\AndroidApps\ThirdApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.1_83b1a58c599a4c2b18861a8671f4360096a0dc7e\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="G:\Programms\AndroidApps\ThirdApp\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\24.2.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="d5c731fc64c03dfe04d51134955b483551c35849">
-        <dex dex="G:\Programms\AndroidApps\ThirdApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-vector-drawable-24.2.1_d3175464f55238e7d347155c147018ebd20e7254\classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -111,6 +84,60 @@
     </item>
     <item
         is-multidex="true"
+        jar="G:\Programms\AndroidApps\ThirdApp\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="e7f3132168957eefc46229fc32c3bd464642b71e">
+        <dex dex="G:\Programms\AndroidApps\ThirdApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-core-ui-24.2.1_1f6eec4694510625e97675fc811b7f2488affc43\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="G:\Programms\AndroidApps\ThirdApp\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\24.2.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="43b2dba6b5a0b14527961b75329d0b90025f15ea">
+        <dex dex="G:\Programms\AndroidApps\ThirdApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-appcompat-v7-24.2.1_1b1d986789b9f5d65e6ed19497315f3ef71ff25b\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="G:\Programms\AndroidApps\ThirdApp\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\24.2.1\jars\libs\internal_impl-24.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="fbf8da429efd5ad21e02e3e5ecaa1efc4167878d">
+        <dex dex="G:\Programms\AndroidApps\ThirdApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.1_f1c2f9cad367281fb976922b607e225b1f25742e\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="G:\Programms\AndroidApps\ThirdApp\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="0d6c726c3efb7aafb2988944790d5f9b59b9cd09">
+        <dex dex="G:\Programms\AndroidApps\ThirdApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_55820783646e53199d9c1b1c5e12dae8ee147c43\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="G:\Programms\AndroidApps\ThirdApp\app\build\intermediates\exploded-aar\com.android.support\support-v4\24.2.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="G:\Programms\AndroidApps\ThirdApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-v4-24.2.1_e21429e23679cbe352be5a9dee57d63819ff8d33\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="G:\Programms\AndroidApps\ThirdApp\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\24.2.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="d5c731fc64c03dfe04d51134955b483551c35849">
+        <dex dex="G:\Programms\AndroidApps\ThirdApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-vector-drawable-24.2.1_d3175464f55238e7d347155c147018ebd20e7254\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
         jar="G:\Programms\AndroidApps\ThirdApp\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\24.2.1\jars\classes.jar"
         jumboMode="true"
         optimize="true"
@@ -138,39 +165,12 @@
     </item>
     <item
         is-multidex="true"
-        jar="G:\Programms\AndroidApps\ThirdApp\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="e7f3132168957eefc46229fc32c3bd464642b71e">
-        <dex dex="G:\Programms\AndroidApps\ThirdApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-core-ui-24.2.1_1f6eec4694510625e97675fc811b7f2488affc43\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
         jar="C:\Users\yuras\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\24.2.1\support-annotations-24.2.1.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.0"
         sha1="8de3aafecbdf98a61db6427f008f2d515bcd2544">
         <dex dex="G:\Programms\AndroidApps\ThirdApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\support-annotations-24.2.1_c7455e0719ed22ab0a3c60867daf6405b21e4c9c\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="G:\Programms\AndroidApps\ThirdApp\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\24.2.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="43b2dba6b5a0b14527961b75329d0b90025f15ea">
-        <dex dex="G:\Programms\AndroidApps\ThirdApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-appcompat-v7-24.2.1_1b1d986789b9f5d65e6ed19497315f3ef71ff25b\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="G:\Programms\AndroidApps\ThirdApp\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\24.2.1\jars\libs\internal_impl-24.2.1.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="fbf8da429efd5ad21e02e3e5ecaa1efc4167878d">
-        <dex dex="G:\Programms\AndroidApps\ThirdApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.1_f1c2f9cad367281fb976922b607e225b1f25742e\classes.dex" />
     </item>
 
 </items>

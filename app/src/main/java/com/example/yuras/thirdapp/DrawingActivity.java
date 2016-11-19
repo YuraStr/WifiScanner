@@ -31,7 +31,7 @@ public class DrawingActivity extends Activity {
             public void onClick(View view) {
                 Bitmap bitmap = Bitmap.createBitmap(500, 300, Bitmap.Config.ARGB_8888);
 
-                Can vas canvas = new Canvas(bitmap);
+                Canvas canvas = new Canvas(bitmap);
                 canvas.drawARGB(80, 102, 204, 255);
 
                 // настройка кисти

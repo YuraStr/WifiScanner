@@ -6,6 +6,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
 import android.os.Build;
@@ -17,8 +21,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -26,6 +30,12 @@ import java.util.List;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
+    private final static int LINE_LENGTH = 10;
+    private final static int START_COORD_X = 250;
+    private final static int START_COORD_Y = 250;
+    private final static int CANVAS_HEIGHT = 1000;
+    private final static int CANVAS_WIDTH = 1000;
+
     private static final int PERMISSIONS_REQUEST_CODE_ACCESS_COARSE_LOCATION = 1001;
     private static final int delay = 5000;
 
@@ -36,12 +46,17 @@ public class MainActivity extends AppCompatActivity {
     Handler h;
     Runnable scan;
     Runnable orientation;
-    ArrayList<String> list;
+    ArrayList<String> directions_list;
 
     Button startBtn;
     Button stopBtn;
 
     ListView lv;
+
+    Canvas canvas;
+    Paint paint;
+    ImageView imageView;
+    Bitmap bitmap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,14 +65,22 @@ public class MainActivity extends AppCompatActivity {
 
         h = new Handler();
 
+        bitmap = Bitmap.createBitmap(CANVAS_WIDTH, CANVAS_HEIGHT, Bitmap.Config.ARGB_8888);
+        canvas = new Canvas(bitmap);
+        canvas.drawARGB(80, 102, 204, 255);
+
+        paint = new Paint();
+        paint.setColor(Color.BLACK);
+        paint.setStrokeWidth(4);
+
         mainWifi = (WifiManager) getSystemService(Context.WIFI_SERVICE);
         sensorsHandler = new SensorsHandler(this);
 
         startBtn = (Button) findViewById(R.id.start);
         stopBtn = (Button) findViewById(R.id.stop);
-        lv = (ListView) findViewById(R.id.lv);
+        imageView = (ImageView) findViewById(R.id.iv_main);
 
-        list = new ArrayList<>();
+        directions_list = new ArrayList<>();
 
         wifiScanReceiver = new WifiReceiver();
         registerReceiver(wifiScanReceiver,
@@ -89,14 +112,22 @@ public class MainActivity extends AppCompatActivity {
         orientation = new Runnable() {
             @Override
             public void run() {
-                list.add(String.format(Locale.ENGLISH, "%.2f", sensorsHandler.getAzimuth()));
+                directions_list.add(String.format(Locale.ENGLISH, "%.2f", sensorsHandler.getAzimuth()));
 
-                ArrayAdapter<String> adapter = new ArrayAdapter<>(getApplicationContext(),
-                        android.R.layout.simple_list_item_1, list);
+                double x = START_COORD_X, y = START_COORD_Y;
+                double offsetX, offsetY;
+                for (int i = 0; i < directions_list.size(); i++) {
+                    offsetX = LINE_LENGTH * Math.cos(Math.toRadians(Double.parseDouble(directions_list.get(i))));
+                    offsetY = LINE_LENGTH * Math.sin(Math.toRadians(Double.parseDouble(directions_list.get(i))));
 
-                lv.setAdapter(adapter);
+                    canvas.drawLine((float)x, (float)y, (float)(x + offsetX), (float)(y + offsetY), paint);
 
-                h.postDelayed(orientation, 1000);
+                    x += offsetX;
+                    y += offsetY;
+                }
+                imageView.setImageBitmap(bitmap);
+
+                h.postDelayed(orientation, 250);
             }
         };
     }
@@ -173,9 +204,5 @@ public class MainActivity extends AppCompatActivity {
         h.removeCallbacks(orientation);
         startBtn.setVisibility(View.VISIBLE);
         stopBtn.setVisibility(View.GONE);
-
-        Intent intent = new Intent(this, TrajectoryActivity.class);
-        intent.putStringArrayListExtra("directions", list);
-        startActivity(intent);
     }
 }
