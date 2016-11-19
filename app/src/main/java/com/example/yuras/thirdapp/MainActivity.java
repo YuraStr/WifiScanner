@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
     Button stopBtn;
 
     double x, y;
+    double offsetX, offsetY;
 
     Canvas canvas;
     Paint paint;
@@ -116,24 +117,21 @@ public class MainActivity extends AppCompatActivity {
 
         path = new Path();
         path.moveTo(START_COORD_X, START_COORD_Y);
+        x = START_COORD_X;
+        y = START_COORD_Y;
         orientation = new Runnable() {
             @Override
             public void run() {
-                directions_list.add(String.format(Locale.ENGLISH, "%.2f", sensorsHandler.getAzimuth()));
+                double angle = sensorsHandler.getAzimuth();
 
-                x = START_COORD_X;
-                y = START_COORD_Y;
-                double offsetX, offsetY;
-                for (int i = 0; i < directions_list.size(); i++) {
-                    offsetX = LINE_LENGTH * Math.cos(Math.toRadians(Double.parseDouble(directions_list.get(i))));
-                    offsetY = LINE_LENGTH * Math.sin(Math.toRadians(Double.parseDouble(directions_list.get(i))));
+                offsetX = LINE_LENGTH * Math.cos(Math.toRadians(angle));
+                offsetY = LINE_LENGTH * Math.sin(Math.toRadians(angle));
 
-                    canvas.drawLine((float)x, (float)y, (float)(x + offsetX), (float)(y + offsetY), paint);
-                    path.lineTo((float) (x + offsetX), (float) (y + offsetY));
+                canvas.drawLine((float)x, (float)y, (float)(x + offsetX), (float)(y + offsetY), paint);
+                path.lineTo((float) (x + offsetX), (float) (y + offsetY));
 
-                    x += offsetX;
-                    y += offsetY;
-                }
+                x += offsetX;
+                y += offsetY;
 
                 imageView.setImageBitmap(bitmap);
 
