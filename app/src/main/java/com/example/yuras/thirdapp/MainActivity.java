@@ -9,7 +9,10 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.LinearGradient;
 import android.graphics.Paint;
+import android.graphics.Path;
+import android.graphics.Shader;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
 import android.os.Build;
@@ -51,12 +54,13 @@ public class MainActivity extends AppCompatActivity {
     Button startBtn;
     Button stopBtn;
 
-    ListView lv;
+    double x, y;
 
     Canvas canvas;
     Paint paint;
     ImageView imageView;
     Bitmap bitmap;
+    Path path;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
 
         paint = new Paint();
         paint.setColor(Color.BLACK);
+        paint.setShader(new LinearGradient(0, 0, 1000, 1000, Color.GREEN, Color.RED, Shader.TileMode.MIRROR));
         paint.setStrokeWidth(4);
 
         mainWifi = (WifiManager) getSystemService(Context.WIFI_SERVICE);
@@ -109,22 +114,27 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
+        path = new Path();
+        path.moveTo(START_COORD_X, START_COORD_Y);
         orientation = new Runnable() {
             @Override
             public void run() {
                 directions_list.add(String.format(Locale.ENGLISH, "%.2f", sensorsHandler.getAzimuth()));
 
-                double x = START_COORD_X, y = START_COORD_Y;
+                x = START_COORD_X;
+                y = START_COORD_Y;
                 double offsetX, offsetY;
                 for (int i = 0; i < directions_list.size(); i++) {
                     offsetX = LINE_LENGTH * Math.cos(Math.toRadians(Double.parseDouble(directions_list.get(i))));
                     offsetY = LINE_LENGTH * Math.sin(Math.toRadians(Double.parseDouble(directions_list.get(i))));
 
                     canvas.drawLine((float)x, (float)y, (float)(x + offsetX), (float)(y + offsetY), paint);
+                    path.lineTo((float) (x + offsetX), (float) (y + offsetY));
 
                     x += offsetX;
                     y += offsetY;
                 }
+
                 imageView.setImageBitmap(bitmap);
 
                 h.postDelayed(orientation, 250);
@@ -202,6 +212,10 @@ public class MainActivity extends AppCompatActivity {
     public void stopScan(View view) {
         h.removeCallbacks(scan);
         h.removeCallbacks(orientation);
+
+        path.close();
+        canvas.drawPath(path, paint);
+
         startBtn.setVisibility(View.VISIBLE);
         stopBtn.setVisibility(View.GONE);
     }
