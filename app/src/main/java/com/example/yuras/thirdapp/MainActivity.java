@@ -16,37 +16,48 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
     private static final int PERMISSIONS_REQUEST_CODE_ACCESS_COARSE_LOCATION = 1001;
+    private static final int delay = 5000;
 
     WifiManager mainWifi;
     WifiReceiver wifiScanReceiver;
-    ListView listView;
-    TextView tv;
+    SensorsHandler sensorsHandler;
 
     Handler h;
+    Runnable scan;
+    Runnable orientation;
+    ArrayList<String> list;
+
+    Button startBtn;
+    Button stopBtn;
+
+    ListView lv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        listView = (ListView) findViewById(R.id.list);
-        tv = (TextView) findViewById(R.id.tv);
-        tv.setText(R.string.wifi_count);
-
         h = new Handler();
-        final int delay = 5000;
 
         mainWifi = (WifiManager) getSystemService(Context.WIFI_SERVICE);
+        sensorsHandler = new SensorsHandler(this);
+
+        startBtn = (Button) findViewById(R.id.start);
+        stopBtn = (Button) findViewById(R.id.stop);
+        lv = (ListView) findViewById(R.id.lv);
+
+        list = new ArrayList<>();
 
         wifiScanReceiver = new WifiReceiver();
         registerReceiver(wifiScanReceiver,
@@ -65,16 +76,29 @@ public class MainActivity extends AppCompatActivity {
                     PERMISSIONS_REQUEST_CODE_ACCESS_COARSE_LOCATION);
         }
 
-        h.postDelayed(new Runnable() {
+        scan = new Runnable() {
             @Override
             public void run() {
                 mainWifi.startScan();
                 Toast.makeText(getApplicationContext(), "Scanning",
                         Toast.LENGTH_SHORT).show();
-
-                h.postDelayed(this, delay);
+                h.postDelayed(scan, delay);
             }
-        }, delay);
+        };
+
+        orientation = new Runnable() {
+            @Override
+            public void run() {
+                list.add(String.format(Locale.ENGLISH, "%.2f", sensorsHandler.getAzimuth()));
+
+                ArrayAdapter<String> adapter = new ArrayAdapter<>(getApplicationContext(),
+                        android.R.layout.simple_list_item_1, list);
+
+                lv.setAdapter(adapter);
+
+                h.postDelayed(orientation, 1000);
+            }
+        };
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -91,6 +115,8 @@ public class MainActivity extends AppCompatActivity {
 
     protected void onPause() {
         unregisterReceiver(wifiScanReceiver);
+        h.removeCallbacks(scan);
+        h.removeCallbacks(orientation);
         super.onPause();
     }
 
@@ -111,11 +137,8 @@ public class MainActivity extends AppCompatActivity {
                     wifi_names.add(scanResults.get(i).SSID);
                 }
 
-                ListAdapter adapter = new ArrayAdapter<>(getApplicationContext(),
-                        android.R.layout.simple_list_item_1, wifi_names);
-
-                listView.setAdapter(adapter);
-                tv.setText("Wifi points count:" + " " + String.valueOf(scanResults.size()));
+                Toast.makeText(getApplicationContext(), "Received",
+                        Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(getApplicationContext(), "Cannot receive any wifi",
                         Toast.LENGTH_LONG).show();
@@ -136,5 +159,23 @@ public class MainActivity extends AppCompatActivity {
 
     public void gotoSensors(View view) {
         startActivity(new Intent(this, SensorsActivity.class));
+    }
+
+    public void startScan(View view) {
+        h.post(scan);
+        h.post(orientation);
+        startBtn.setVisibility(View.GONE);
+        stopBtn.setVisibility(View.VISIBLE);
+    }
+
+    public void stopScan(View view) {
+        h.removeCallbacks(scan);
+        h.removeCallbacks(orientation);
+        startBtn.setVisibility(View.VISIBLE);
+        stopBtn.setVisibility(View.GONE);
+
+        Intent intent = new Intent(this, TrajectoryActivity.class);
+        intent.putStringArrayListExtra("directions", list);
+        startActivity(intent);
     }
 }

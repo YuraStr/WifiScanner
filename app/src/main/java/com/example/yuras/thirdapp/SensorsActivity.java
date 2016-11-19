@@ -7,7 +7,6 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -27,7 +26,6 @@ public class SensorsActivity extends Activity implements SensorEventListener {
     private final float[] mOrientationAngles = new float[3];
 
     List<String> mSensorsData;
-    ListAdapter adapter;
 
     ListView sensors_lv;
 
@@ -71,6 +69,10 @@ public class SensorsActivity extends Activity implements SensorEventListener {
 
     public void gotoWifi(View view) {
         finish();
+    }
+
+    public void gotoDrawing(View view) {
+        startActivity(new Intent(this, DrawingActivity.class));
     }
 
     @Override

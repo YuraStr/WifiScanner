@@ -4,4 +4,8 @@
     <string name="edit_message">Edit message</string>
     <string name="goto_sensors">Go to sensors</string>
     <string name="goto_wifi">Go to Wifi</string>
+    <string name="goto_drawing">Go to Drawing</string>
+    <string name="start">Start</string>
+    <string name="stop">Stop</string>
+    <string name="title_activity_trajectory">TrajectoryActivity</string>
 </resources>

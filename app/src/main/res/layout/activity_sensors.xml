@@ -18,4 +18,12 @@
         android:layout_below="@id/goto_wifi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/goto_drawing"
+        android:text="@string/goto_drawing"
+        android:layout_below="@id/sensors_lv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="gotoDrawing"/>
 </RelativeLayout>

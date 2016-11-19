@@ -21,7 +21,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SensorsActivity"></activity>
+        <activity android:name=".SensorsActivity" />
+        <activity android:name=".DrawingActivity" />
+        <activity
+            android:name=".TrajectoryActivity"
+            android:label="@string/title_activity_trajectory"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.yuras.thirdapp.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

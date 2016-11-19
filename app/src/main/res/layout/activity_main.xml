@@ -12,14 +12,23 @@
         android:layout_height="wrap_content"
         android:onClick="gotoSensors"/>
 
-    <TextView
-        android:id="@+id/tv"
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/start"
+        android:text="@string/start"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20sp"/>
+        android:onClick="startScan" />
+
+    <Button
+        android:id="@+id/stop"
+        android:text="@string/stop"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="stopScan" />
 
     <ListView
-        android:id="@+id/list"
+        android:id="@+id/lv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 </LinearLayout>
