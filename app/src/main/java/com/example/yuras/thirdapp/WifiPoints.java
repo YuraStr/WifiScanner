@@ -33,14 +33,20 @@ public class WifiPoints {
     }
 
     private static void fillSSIDs(WifiPointInfo point) {
+        boolean fl = false;
         for(int i = 0; i < point.getScanResults().size(); i++) {
             String ssid = point.getScanResults().get(i).SSID;
             for (int j = 0; j < ssids.size(); j++) {
-                if (!ssid.equals(ssids.get(j))) {
-                    ssids.add(ssid);
+                if (ssid.equals(ssids.get(j))) {
+                    fl = true;
+                    break;
                 }
             }
+            if (!fl) {
+                ssids.add(ssid);
+            }
         }
+
     }
 
     public static ArrayList<Double> getMaxWifiLevelCoords(String ssid) {

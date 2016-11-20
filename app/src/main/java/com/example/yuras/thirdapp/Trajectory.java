@@ -14,7 +14,7 @@ public class Trajectory {
         X.add(x);
         Y.add(y);
     }
-    
+
     public static ArrayList<Double> getCoordsX() {
         return X;
     }

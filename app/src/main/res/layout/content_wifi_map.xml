@@ -13,4 +13,10 @@
     tools:context="com.example.yuras.thirdapp.WifiMapActivity"
     tools:showIn="@layout/activity_wifi_map">
 
+    <ImageView
+        android:id="@+id/iv_wifi_map"
+        android:layout_marginTop="55dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
 </RelativeLayout>

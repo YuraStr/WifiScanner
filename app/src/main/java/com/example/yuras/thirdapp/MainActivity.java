@@ -19,6 +19,7 @@ import android.os.Build;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -36,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
     private final static int CANVAS_WIDTH = 1000;
 
     private static final int PERMISSIONS_REQUEST_CODE_ACCESS_COARSE_LOCATION = 1001;
-    private static final int SCAN_DELAY = 5000;
     private static final int ORIENTATION_DELAY = 250;
 
     private WifiManager mainWifi;
@@ -105,7 +105,6 @@ public class MainActivity extends AppCompatActivity {
                 mainWifi.startScan();
                 Toast.makeText(getApplicationContext(), "Scanning",
                         Toast.LENGTH_SHORT).show();
-                h.postDelayed(scan, SCAN_DELAY);
             }
         };
 
@@ -113,6 +112,7 @@ public class MainActivity extends AppCompatActivity {
         path.moveTo(START_COORD_X, START_COORD_Y);
         x = START_COORD_X;
         y = START_COORD_Y;
+        Trajectory.addCoords(x, y);
         orientation = new Runnable() {
             @Override
             public void run() {
@@ -126,6 +126,7 @@ public class MainActivity extends AppCompatActivity {
 
                 x += offsetX;
                 y += offsetY;
+                Trajectory.addCoords(x, y);
 
                 imageView.setImageBitmap(bitmap);
 
@@ -169,6 +170,8 @@ public class MainActivity extends AppCompatActivity {
 
                 Toast.makeText(getApplicationContext(), "Received",
                         Toast.LENGTH_SHORT).show();
+
+                h.post(scan);
             } else {
                 Toast.makeText(getApplicationContext(), "Cannot receive any wifi",
                         Toast.LENGTH_LONG).show();
