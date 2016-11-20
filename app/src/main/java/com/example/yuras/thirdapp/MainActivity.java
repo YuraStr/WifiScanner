@@ -22,15 +22,11 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
     private final static int LINE_LENGTH = 10;
@@ -40,28 +36,28 @@ public class MainActivity extends AppCompatActivity {
     private final static int CANVAS_WIDTH = 1000;
 
     private static final int PERMISSIONS_REQUEST_CODE_ACCESS_COARSE_LOCATION = 1001;
-    private static final int delay = 5000;
+    private static final int SCAN_DELAY = 5000;
+    private static final int ORIENTATION_DELAY = 250;
 
-    WifiManager mainWifi;
-    WifiReceiver wifiScanReceiver;
-    SensorsHandler sensorsHandler;
+    private WifiManager mainWifi;
+    private WifiReceiver wifiScanReceiver;
+    private SensorsHandler sensorsHandler;
 
-    Handler h;
-    Runnable scan;
-    Runnable orientation;
-    ArrayList<String> directions_list;
+    private Handler h;
+    private Runnable scan;
+    private Runnable orientation;
 
-    Button startBtn;
-    Button stopBtn;
+    private Button startBtn;
+    private Button stopBtn;
 
     double x, y;
     double offsetX, offsetY;
 
-    Canvas canvas;
-    Paint paint;
-    ImageView imageView;
-    Bitmap bitmap;
-    Path path;
+    private Canvas canvas;
+    private Paint paint;
+    private ImageView imageView;
+    private Bitmap bitmap;
+    private Path path;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,8 +82,6 @@ public class MainActivity extends AppCompatActivity {
         stopBtn = (Button) findViewById(R.id.stop);
         imageView = (ImageView) findViewById(R.id.iv_main);
 
-        directions_list = new ArrayList<>();
-
         wifiScanReceiver = new WifiReceiver();
         registerReceiver(wifiScanReceiver,
                 new IntentFilter(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION));
@@ -111,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
                 mainWifi.startScan();
                 Toast.makeText(getApplicationContext(), "Scanning",
                         Toast.LENGTH_SHORT).show();
-                h.postDelayed(scan, delay);
+                h.postDelayed(scan, SCAN_DELAY);
             }
         };
 
@@ -135,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
 
                 imageView.setImageBitmap(bitmap);
 
-                h.postDelayed(orientation, 250);
+                h.postDelayed(orientation, ORIENTATION_DELAY);
             }
         };
     }
@@ -170,11 +164,8 @@ public class MainActivity extends AppCompatActivity {
         public void onReceive(Context context, Intent intent) {
             if (intent.getAction().equals(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION)) {
                 List<ScanResult> scanResults = mainWifi.getScanResults();
-                List<String> wifi_names = new ArrayList<>();
 
-                for (int i = 0; i < scanResults.size(); i++) {
-                    wifi_names.add(scanResults.get(i).SSID);
-                }
+                WifiPoints.add(new WifiPointInfo(scanResults, x, y));
 
                 Toast.makeText(getApplicationContext(), "Received",
                         Toast.LENGTH_SHORT).show();
@@ -216,5 +207,7 @@ public class MainActivity extends AppCompatActivity {
 
         startBtn.setVisibility(View.VISIBLE);
         stopBtn.setVisibility(View.GONE);
+
+        startActivity(new Intent(this, WifiListActivity.class));
     }
 }
